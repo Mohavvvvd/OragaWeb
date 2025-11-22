@@ -627,6 +627,71 @@
             }
         }
 
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    cursor: pointer;
+    z-index: 300;
+}
+
+.hamburger span {
+    display: block;
+    height: 3px;
+    background: #94a3b8;
+    border-radius: 2px;
+    transition: all 0.4s ease;
+}
+
+/* Hamburger animation to X */
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Mobile nav */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 250px;
+        background: #1e293b;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 4rem 2rem;
+        gap: 2rem;
+        transition: right 0.4s ease;
+        z-index: 200;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links li {
+        width: 100%;
+    }
+
+    .nav-links a {
+        font-size: 1.2rem;
+    }
+}
 
 .additional-downloads {
     margin-top: 4rem;
