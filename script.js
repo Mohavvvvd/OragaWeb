@@ -344,6 +344,45 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
+    // Enhanced handling for alternative download links
+document.querySelectorAll('.alt-download-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const url = this.href;
+        
+        // Add click animation
+        this.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+            this.style.transform = '';
+        }, 150);
+        
+        // Create loading state
+        const originalHTML = this.innerHTML;
+        this.innerHTML = `
+            <div class="link-icon">⏳</div>
+            <div class="link-content">
+                <span class="link-title">Loading...</span>
+                <span class="link-subtitle">Please wait</span>
+            </div>
+            <div class="link-arrow"></div>
+        `;
+        
+        this.style.opacity = '0.7';
+        this.style.pointerEvents = 'none';
+        
+        // Open in new tab after short delay for better UX
+        setTimeout(() => {
+            window.open(url, '_blank');
+            
+            // Reset after delay
+            setTimeout(() => {
+                this.innerHTML = originalHTML;
+                this.style.opacity = '1';
+                this.style.pointerEvents = 'auto';
+            }, 1000);
+        }, 500);
+    });
+});
 
     // Enhanced download buttons with analytics
     document.querySelectorAll('.download-btn').forEach(button => {
